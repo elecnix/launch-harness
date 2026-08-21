@@ -92,6 +92,8 @@ func TestRestoreUnsupportedIntegration(t *testing.T) {
 func TestConfigPersistence(t *testing.T) {
 	home := t.TempDir()
 	t.Setenv("HOME", home)
+	// os.UserHomeDir reads USERPROFILE on Windows.
+	t.Setenv("USERPROFILE", home)
 
 	if err := config.SaveIntegration("codex", []string{"gpt-oss:20b"}); err != nil {
 		t.Fatal(err)
