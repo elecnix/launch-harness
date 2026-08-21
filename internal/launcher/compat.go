@@ -129,7 +129,14 @@ type launchConfirmPolicy struct {
 
 var currentLaunchConfirmPolicy launchConfirmPolicy
 
-func withLaunchConfirmPolicy(policy launchConfirmPolicy) func() {
+// LaunchConfirmPolicyYes returns a policy that auto-approves confirmations.
+func LaunchConfirmPolicyYes() launchConfirmPolicy {
+	return launchConfirmPolicy{yes: true}
+}
+
+// WithLaunchConfirmPolicy scopes a confirmation policy for the duration of
+// the returned cleanup function.
+func WithLaunchConfirmPolicy(policy launchConfirmPolicy) func() {
 	old := currentLaunchConfirmPolicy
 	currentLaunchConfirmPolicy = policy
 	return func() {

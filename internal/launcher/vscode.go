@@ -206,7 +206,7 @@ func (v *VSCode) ensureModelsRegistered(ctx context.Context, client *api.Client,
 		if !strings.Contains(model, ":") && registered[model+":latest"] {
 			continue
 		}
-		if err := pullModel(ctx, client, model, false); err != nil {
+		if err := pullModel(ctx, client, model, false); err != nil { //nolint:staticcheck // pullModel is a stub without a server and always errors
 			fmt.Fprintf(os.Stderr, "%s  Warning: could not register model %s: %v%s\n", ansiYellow, model, err, ansiReset)
 		}
 	}
@@ -378,7 +378,7 @@ func (v *VSCode) ShowInModelPicker(models []string) error {
 	if err != nil {
 		return fmt.Errorf("opening state database: %w", err)
 	}
-	defer db.Close()
+	defer func() { _ = db.Close() }()
 
 	// Create the table if this is a fresh DB. Schema must match what VS Code creates.
 	if needsCreate {

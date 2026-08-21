@@ -87,7 +87,7 @@ func (d *Droid) Edit(models []LaunchModel) error {
 		if err := json.Unmarshal(data, &settingsMap); err != nil {
 			return fmt.Errorf("failed to parse settings file: %w, at: %s", err, settingsPath)
 		}
-		json.Unmarshal(data, &settings) // ignore error, zero values are fine
+		_ = json.Unmarshal(data, &settings) // zero values are fine on failure
 	}
 
 	settingsMap = updateDroidSettings(settingsMap, settings, models)

@@ -112,6 +112,10 @@ func launch(name string, extraArgs []string) error {
 		return nil
 	}
 
+	if yes {
+		defer launcher.WithLaunchConfirmPolicy(launcher.LaunchConfirmPolicyYes())()
+	}
+
 	if err := launcher.EnsureIntegrationInstalled(spec.Name, runner); err != nil {
 		return err
 	}

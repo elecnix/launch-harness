@@ -17,7 +17,7 @@ var poolsideGOOS = runtime.GOOS
 func (p *Poolside) String() string { return "Pool" }
 
 func poolsideUnsupportedError() error {
-	return fmt.Errorf("Warning: Poolside is not currently supported on Windows")
+	return fmt.Errorf("poolside is not currently supported on Windows")
 }
 
 func (p *Poolside) args(model string, extra []string) []string {

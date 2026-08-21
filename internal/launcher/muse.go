@@ -110,7 +110,7 @@ func (m *Muse) String() string { return "Muse Code" }
 
 func (m *Muse) Supported() error {
 	if museGOOS == "windows" {
-		return fmt.Errorf("Warning: Muse is not currently supported on Windows")
+		return fmt.Errorf("muse is not currently supported on Windows")
 	}
 	return nil
 }
